@@ -1,0 +1,33 @@
+{
+  "name": "memory-game",
+  "version": "1.0.0",
+  "description": "Memory game (or matching game) make during Front End Nanodedree on Udacity",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarkoNikolajevic/memory-game.git"
+  },
+  "author": "Marko Nikolajevic",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "browser-sync": "^2.23.5",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-babel": "^7.0.1",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^1.12.1",
+    "gulp-uglify": "^3.0.0",
+    "gulp-webp": "^3.0.0"
+  },
+  "presets": [
+    "env"
+  ]
+}
