@@ -24,4 +24,4 @@ The main tools I used are [Gulp](https://gulpjs.com/) as a task runner to automa
 
 
 ### Play the game
-Go [here]() to play the game.
+Go [here](http://markonikolajevic.com/memory-game/) to play the game.
