@@ -6,13 +6,27 @@
   padding: 2em
   border-radius: 10px
 
-  .card
-    background: green
-    color: $mainColor
-    height: 125px
-    width: 125px
-    display: flex
-    justify-content: center
-    align-items: center
-    border-radius: 7px
-    font-size: 3em
+.card
+  background: $cardCloseBg
+  color: $mainColor
+  height: 125px
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 7px
+  font-size: 3em
+  cursor: pointer
+  transition: all 400ms ease-in-out
+  margin: 0 auto
+  &:hover
+    transform: translateY(-2px)
+
+// @media screen and (min-width: 400px)
+//   .card
+//     height: 125px
+//     width: 125px
+
+@media screen and (min-width: 34em)
+  .card-board
+    grid-template-columns: repeat(4, 1fr)
