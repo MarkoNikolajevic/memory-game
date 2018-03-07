@@ -20,12 +20,10 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.1.0",
     "gulp-babel": "^7.0.1",
-    "gulp-imagemin": "^4.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^1.12.1",
-    "gulp-uglify": "^3.0.0",
-    "gulp-webp": "^3.0.0"
+    "gulp-uglify": "^3.0.0"
   },
   "presets": [
     "env"

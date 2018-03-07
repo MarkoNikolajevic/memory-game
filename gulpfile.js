@@ -1,6 +1,4 @@
 const gulp = require("gulp");
-const imagemin = require("gulp-imagemin");
-const webp = require("gulp-webp");
 const sass = require("gulp-sass");
 const uglify = require("gulp-uglify");
 const pump = require("pump");
@@ -10,23 +8,6 @@ const sourcemaps = require("gulp-sourcemaps");
 const browserSync = require("browser-sync").create();
 const rename = require("gulp-rename");
 require("babel-register");
-
-// Optimize images
-gulp.task("optimizeImg", () =>
-  gulp.src("src/assets/img/*")
-    .pipe(imagemin({
-      progressive: true,
-      verbose: true
-    }))
-    .pipe(gulp.dest("dist/assets/img"))
-);
-
-// Convert images into webp format
-gulp.task("webpImg", () =>
-  gulp.src("dist/assets/img/*")
-    .pipe(webp())
-    .pipe(gulp.dest("dist/assets/img/"))
-);
 
 // Compile sass and minify
 gulp.task("sass", () =>
