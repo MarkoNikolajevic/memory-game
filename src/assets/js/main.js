@@ -15,4 +15,11 @@ function shuffle(array) {
 	return array;
 }
 
-shuffle(cards);
+// Add click event on cards
+function showCards() {
+	cards.forEach(function(el) {
+		el.addEventListener("click", function() {
+			el.classList.add("card-open");
+		});
+	});
+}
