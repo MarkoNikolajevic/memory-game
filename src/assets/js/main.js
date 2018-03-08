@@ -23,3 +23,8 @@ function showCards() {
 		});
 	});
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+	shuffle(cards);
+	showCards();
+});
