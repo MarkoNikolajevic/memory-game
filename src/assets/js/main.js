@@ -24,7 +24,19 @@ function showCards() {
 	});
 }
 
+// Create new deck
+const deck = document.querySelector(".card-board");
+function newDeck() {
+	let shuffCards = shuffle(cards);
+	deck.innerHTML = "";
+	for (let i = 0; i < shuffCards.length; i++) {
+		deck.appendChild(shuffCards[i]);
+	}
+}
+
+//  Match cards
+
 document.addEventListener("DOMContentLoaded", function() {
-	shuffle(cards);
+	newDeck();
 	showCards();
 });
