@@ -25,12 +25,19 @@
 
   svg
     opacity: 0
+    transition: opacity 400ms ease-in-out
 
 .card-open
-  transform: rotateY(360deg)
+  animation: openCard 400ms ease-in-out
   background: $cardOpenBg
   svg
     opacity: 1
+
+@keyframes openCard
+  0%
+    transform: none
+  100%
+    transform: rotateY(360deg)
 
 @media screen and (min-width: 34em)
   .card-board
