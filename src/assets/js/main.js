@@ -10,6 +10,7 @@ function shuffle(array) {
 		randomIndex = Math.floor(Math.random() * currentIndex);
 		currentIndex -= 1;
 		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
 		array[randomIndex] = temporaryValue;
 	}
 	return array;
@@ -29,14 +30,26 @@ const deck = document.querySelector(".card-board");
 function newDeck() {
 	let shuffCards = shuffle(cards);
 	deck.innerHTML = "";
-	for (let i = 0; i < shuffCards.length; i++) {
-		deck.appendChild(shuffCards[i]);
-	}
+	shuffCards.forEach(function(el) {
+		deck.append(el);
+	});
 }
 
 //  Match cards
+const openedCards = [];
+
+function cardsToMatch() {
+	cards.forEach(function(el) {
+		el.addEventListener("click", function() {
+			openedCards.push(this);
+			console.log(openedCards.length);
+		});
+	});
+}
+
 
 document.addEventListener("DOMContentLoaded", function() {
 	newDeck();
 	showCards();
+	cardsToMatch();
 });
