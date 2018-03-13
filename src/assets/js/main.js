@@ -1,6 +1,7 @@
 // Create an array of all cards
 let cards = document.querySelectorAll(".card");
 cards = Array.from(cards);
+let openCards = [];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -16,15 +17,6 @@ function shuffle(array) {
 	return array;
 }
 
-// Add click event on cards
-function showCards() {
-	cards.forEach(function(el) {
-		el.addEventListener("click", function() {
-			el.classList.add("card-open");
-		});
-	});
-}
-
 // Create new deck
 const deck = document.querySelector(".card-board");
 function newDeck() {
@@ -35,21 +27,17 @@ function newDeck() {
 	});
 }
 
-//  Match cards
-const openedCards = [];
-
-function cardsToMatch() {
-	cards.forEach(function(el) {
-		el.addEventListener("click", function() {
-			openedCards.push(this);
-			console.log(openedCards.length);
-		});
-	});
+// Close cards
+function closeCards() {
+	for (let i = 0; i < openCards.length; i++) {
+		if (!openCards[i].classList.contains("matched")) {
+			openCards[i].classList.remove("card-open", "card-show", "unmatched");
+		}
+	}
 }
 
 
 document.addEventListener("DOMContentLoaded", function() {
 	newDeck();
 	showCards();
-	cardsToMatch();
 });
