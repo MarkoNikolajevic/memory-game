@@ -29,14 +29,48 @@
 .card-open
   animation: openCard 400ms ease-in-out
   background: $cardOpenBg
+
+.card-close
+  animation: closeCard 400ms ease-in-out
+
+.card-show
   svg
     opacity: 1
+
+.disabled
+  pointer-events: none
+
+.matched
+  background: $cardCorrectBg
+
+.unmatched
+  background: $cardErrorBg
+
+.correct
+  animation: correct 1s cubic-bezier(.36,.07,.19,.97) both
 
 @keyframes openCard
   0%
     transform: none
   100%
     transform: rotateY(360deg)
+
+@keyframes closeCard
+  0%
+    transform: none
+  100%
+    transform: rotateY(-360deg)
+
+@keyframes correct
+  10%, 90%
+    transform: translate3d(-1px, 0, 0)
+  20%, 80%
+    transform: translate3d(2px, 0, 0)
+  30%, 50%, 70%
+    transform: translate3d(-4px, 0, 0)
+  40%, 60%
+    transform: translate3d(4px, 0, 0)
+
 
 @media screen and (min-width: 34em)
   .card

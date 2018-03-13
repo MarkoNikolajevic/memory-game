@@ -51,6 +51,7 @@ function showCards() {
 function closeCards() {
 	for (let i = 0; i < openCards.length; i++) {
 		if (!openCards[i].classList.contains("matched")) {
+			openCards[i].classList.add("card-close");
 			openCards[i].classList.remove("card-open", "card-show", "unmatched");
 		}
 	}
@@ -59,9 +60,9 @@ function closeCards() {
 // Matched
 function matched() {
 	openCards[0].classList.remove("card-open");
-	openCards[0].classList.add("matched");
+	openCards[0].classList.add("matched", "disabled", "correct");
 	openCards[1].classList.remove("card-open");
-	openCards[1].classList.add("matched");
+	openCards[1].classList.add("matched", "disabled", "correct");
 }
 
 // Unmatched
