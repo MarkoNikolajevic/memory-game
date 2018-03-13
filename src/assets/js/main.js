@@ -44,6 +44,14 @@ function matched() {
 	openCards[1].classList.add("matched");
 }
 
+// Unmatched
+function unmatched() {
+	openCards[0].classList.remove("card-open");
+	openCards[0].classList.add("unmatched");
+	openCards[1].classList.remove("card-open");
+	openCards[1].classList.add("unmatched");
+}
+
 
 document.addEventListener("DOMContentLoaded", function() {
 	newDeck();
