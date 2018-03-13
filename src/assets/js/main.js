@@ -36,6 +36,14 @@ function closeCards() {
 	}
 }
 
+// Matched
+function matched() {
+	openCards[0].classList.remove("card-open");
+	openCards[0].classList.add("matched");
+	openCards[1].classList.remove("card-open");
+	openCards[1].classList.add("matched");
+}
+
 
 document.addEventListener("DOMContentLoaded", function() {
 	newDeck();
