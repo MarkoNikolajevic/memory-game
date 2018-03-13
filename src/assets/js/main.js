@@ -27,6 +27,26 @@ function newDeck() {
 	});
 }
 
+// Show cards function
+function showCards() {
+	for (const card of cards) {
+		card.addEventListener("click", function() {
+			card.classList.add("card-open", "card-show");
+			openCards.push(card);
+			if (openCards.length === 2 && openCards[0].firstElementChild.getAttribute("data-icon") === openCards[1].firstElementChild.getAttribute("data-icon")) {
+				matched();
+				openCards = [];
+			} else if (openCards.length === 2 && openCards[0].firstElementChild.getAttribute("data-icon") !== openCards[1].firstElementChild.getAttribute("data-icon")) {
+				unmatched();
+				setTimeout(function() {
+					closeCards();
+					openCards = [];
+				}, 500);
+			}
+		});
+	}
+}
+
 // Close cards
 function closeCards() {
 	for (let i = 0; i < openCards.length; i++) {
