@@ -11,7 +11,7 @@ let sec = 0;
 let min = 0;
 const stars = document.querySelector(".stars");
 const restart = document.querySelector(".restart");
-const modal = document.querySelector(".modal");
+const modal = document.querySelector(".modal-container");
 const modalBtn = document.querySelector(".play-again-btn");
 
 // Shuffle function from http://stackoverflow.com/a/2450976
