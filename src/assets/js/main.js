@@ -82,8 +82,15 @@ function unmatched() {
 function movesCounter() {
 	moves++;
 	document.querySelector(".moves").innerHTML = moves;
+	const stars = document.querySelector(".stars");
 	if (moves === 1) {
 		gameTimer();
+	}
+	// Star rating
+	else if (moves > 10 && moves < 13) {
+		stars.removeChild(stars.lastElementChild);
+	} else if (moves > 13 && stars.childNodes === 2) {
+		stars.removeChild(stars.lastElementChild);
 	}
 }
 
