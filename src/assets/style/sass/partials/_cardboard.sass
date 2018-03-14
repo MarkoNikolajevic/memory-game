@@ -45,9 +45,10 @@
 
 .unmatched
   background: $cardErrorBg
+  animation: uncorrect 1s ease-in-out
 
 .correct
-  animation: correct 1s cubic-bezier(.36,.07,.19,.97) both
+  animation: correct 1s ease-in-out
 
 @keyframes openCard
   0%
@@ -62,6 +63,13 @@
     transform: rotateY(-360deg)
 
 @keyframes correct
+  20%, 60%, 90%
+    transform: scale(1.2)
+  40%, 80%, 100%
+    transform: scale(1)
+
+
+@keyframes uncorrect
   10%, 90%
     transform: translate3d(-1px, 0, 0)
   20%, 80%

@@ -45,7 +45,7 @@ function showCards() {
 				setTimeout(function() {
 					closeCards();
 					openCards = [];
-				}, 500);
+				}, 800);
 				movesCounter();
 			}
 		});
