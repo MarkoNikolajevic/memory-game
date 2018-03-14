@@ -1,12 +1,18 @@
-// Create an array of all cards
+// Define variables
 let cards = document.querySelectorAll(".card");
 cards = Array.from(cards);
+const deck = document.querySelector(".card-board");
 let openCards = [];
+const matchedCards = [];
+const timer = document.querySelector(".timer");
+let interval;
 let moves = 0;
 let sec = 0;
 let min = 0;
 const stars = document.querySelector(".stars");
 const restart = document.querySelector(".restart");
+const modal = document.querySelector(".modal");
+const modalBtn = document.querySelector(".play-again-btn");
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -23,7 +29,6 @@ function shuffle(array) {
 }
 
 // Create new deck
-const deck = document.querySelector(".card-board");
 function newDeck() {
 	let shuffCards = shuffle(cards);
 	deck.innerHTML = "";
@@ -40,6 +45,14 @@ function showCards() {
 			openCards.push(card);
 			if (openCards.length === 2 && openCards[0].firstElementChild.getAttribute("data-icon") === openCards[1].firstElementChild.getAttribute("data-icon")) {
 				matched();
+				if (card.classList.contains("matched")) {
+					matchedCards.push(card);
+					if (matchedCards.length === 8) {
+						setTimeout(function() {
+							showModal();
+						}, 1000);
+					}
+				}
 				movesCounter();
 				openCards = [];
 			} else if (openCards.length === 2 && openCards[0].firstElementChild.getAttribute("data-icon") !== openCards[1].firstElementChild.getAttribute("data-icon")) {
@@ -96,9 +109,6 @@ function movesCounter() {
 }
 
 //  Timer
-const timer = document.querySelector(".timer");
-let interval;
-
 function gameTimer() {
 	interval = setInterval(function() {
 		timer.innerHTML = `${min} min ${sec} sec`;
@@ -132,6 +142,25 @@ function restartGame() {
 
 restart.addEventListener("click", restartGame);
 
+// Congratulations modal
+function showModal() {
+	modal.classList.add("show-modal");
+	// Get final time
+	clearInterval(interval);
+	const finalTime = timer.innerHTML;
+	// Get final moves
+	const finalMoves = document.querySelector(".moves").innerHTML;
+	// Get final stars
+	const finalStars = stars.childElementCount;
+
+	const gameInfo = document.querySelector(".game-info");
+	gameInfo.innerHTML = `You finished the game in ${finalTime} with ${finalMoves} moves and got ${finalStars} stars`;
+}
+// Close modal
+modalBtn.addEventListener("click", function() {
+	modal.classList.remove("show-modal");
+	restartGame();
+});
 
 document.addEventListener("DOMContentLoaded", function() {
 	newDeck();
