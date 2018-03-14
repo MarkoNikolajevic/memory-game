@@ -3,7 +3,7 @@ let cards = document.querySelectorAll(".card");
 cards = Array.from(cards);
 const deck = document.querySelector(".card-board");
 let openCards = [];
-const matchedCards = [];
+let matchedCards = [];
 const timer = document.querySelector(".timer");
 let interval;
 let moves = 0;
@@ -50,6 +50,7 @@ function showCards() {
 					if (matchedCards.length === 8) {
 						setTimeout(function() {
 							showModal();
+							matchedCards = [];
 						}, 1000);
 					}
 				}
@@ -137,7 +138,6 @@ function restartGame() {
 	clearInterval(interval);
 	// Reset stars
 	stars.innerHTML = "<i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>";
-
 }
 
 restart.addEventListener("click", restartGame);
