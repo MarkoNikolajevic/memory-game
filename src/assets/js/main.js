@@ -5,6 +5,8 @@ let openCards = [];
 let moves = 0;
 let sec = 0;
 let min = 0;
+const stars = document.querySelector(".stars");
+const restart = document.querySelector(".restart");
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -82,23 +84,23 @@ function unmatched() {
 function movesCounter() {
 	moves++;
 	document.querySelector(".moves").innerHTML = moves;
-	const stars = document.querySelector(".stars");
 	if (moves === 1) {
 		gameTimer();
 	}
 	// Star rating
-	else if (moves > 10 && moves < 13) {
-		stars.removeChild(stars.lastElementChild);
-	} else if (moves > 13 && stars.childNodes === 2) {
-		stars.removeChild(stars.lastElementChild);
+	else if (moves > 10 && moves < 12) {
+		stars.innerHTML = "<i class='fas fa-star'></i><i class='fas fa-star'></i>";
+	} else if (moves > 12) {
+		stars.innerHTML = "<i class='fas fa-star'></i>";
 	}
 }
 
 //  Timer
 const timer = document.querySelector(".timer");
+let interval;
 
 function gameTimer() {
-	setInterval(function() {
+	interval = setInterval(function() {
 		timer.innerHTML = `${min} min ${sec} sec`;
 		sec++;
 		if (sec === 60) {
@@ -107,6 +109,28 @@ function gameTimer() {
 		}
 	}, 1000);
 }
+
+// Restart the game
+function restartGame() {
+	newDeck();
+	// Remove all classes
+	for (const card of cards) {
+		card.classList.remove("matched", "disabled", "correct", "card-show", "card-close");
+	}
+	// Reset moves
+	moves = 0;
+	document.querySelector(".moves").innerHTML = moves;
+	// Reset timer
+	min = 0;
+	sec = 0;
+	timer.innerHTML = `${min} min ${sec} sec`;
+	clearInterval(interval);
+	// Reset stars
+	stars.innerHTML = "<i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>";
+
+}
+
+restart.addEventListener("click", restartGame);
 
 
 document.addEventListener("DOMContentLoaded", function() {
