@@ -1,18 +1,22 @@
 // Define variables
-let cards = document.querySelectorAll(".card");
-cards = Array.from(cards);
-const deck = document.querySelector(".card-board");
-let openCards = [];
-let matchedCards = [];
-const timer = document.querySelector(".timer");
+const game = {
+	cards: document.querySelectorAll(".card"),
+	deck: document.querySelector(".card-board"),
+	moves: 0,
+	sec: 0,
+	min: 0,
+	openCards: [],
+	matchedCards: [],
+	ui: {
+		stars: document.querySelector(".stars"),
+		timer: document.querySelector(".timer"),
+		restart: document.querySelector(".restart"),
+		modal: document.querySelector(".modal-container"),
+		modalBtn: document.querySelector(".play-again-btn")
+	},
+};
+game.cards = Array.from(game.cards);
 let interval;
-let moves = 0;
-let sec = 0;
-let min = 0;
-const stars = document.querySelector(".stars");
-const restart = document.querySelector(".restart");
-const modal = document.querySelector(".modal-container");
-const modalBtn = document.querySelector(".play-again-btn");
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -30,37 +34,39 @@ function shuffle(array) {
 
 // Create new deck
 function newDeck() {
-	let shuffCards = shuffle(cards);
-	deck.innerHTML = "";
+	let shuffCards = shuffle(game.cards);
+	game.deck.innerHTML = "";
 	shuffCards.forEach(function(el) {
-		deck.append(el);
+		game.deck.append(el);
 	});
 }
 
 // Show cards function
 function showCards() {
-	for (const card of cards) {
+	for (const card of game.cards) {
 		card.addEventListener("click", function() {
 			card.classList.add("card-open", "card-show", "disabled");
-			openCards.push(card);
-			if (openCards.length === 2 && openCards[0].firstElementChild.getAttribute("data-icon") === openCards[1].firstElementChild.getAttribute("data-icon")) {
+			if (!game.openCards.includes(card)) {
+				game.openCards.push(card);
+			}
+			if (game.openCards.length === 2 && game.openCards[0].firstElementChild.getAttribute("data-icon") === game.openCards[1].firstElementChild.getAttribute("data-icon")) {
 				matched();
 				if (card.classList.contains("matched")) {
-					matchedCards.push(card);
-					if (matchedCards.length === 8) {
+					game.matchedCards.push(card);
+					if (game.matchedCards.length === 8) {
 						setTimeout(function() {
 							showModal();
-							matchedCards = [];
+							game.matchedCards = [];
 						}, 1000);
 					}
 				}
 				movesCounter();
-				openCards = [];
-			} else if (openCards.length === 2 && openCards[0].firstElementChild.getAttribute("data-icon") !== openCards[1].firstElementChild.getAttribute("data-icon")) {
+				game.openCards = [];
+			} else if (game.openCards.length === 2 && game.openCards[0].firstElementChild.getAttribute("data-icon") !== game.openCards[1].firstElementChild.getAttribute("data-icon")) {
 				unmatched();
 				setTimeout(function() {
 					closeCards();
-					openCards = [];
+					game.openCards = [];
 				}, 800);
 				movesCounter();
 			}
@@ -70,53 +76,53 @@ function showCards() {
 
 // Close cards
 function closeCards() {
-	for (let i = 0; i < openCards.length; i++) {
-		if (!openCards[i].classList.contains("matched")) {
-			openCards[i].classList.add("card-close");
-			openCards[i].classList.remove("card-open", "card-show", "unmatched", "disabled");
+	for (let i = 0; i < game.openCards.length; i++) {
+		if (!game.openCards[i].classList.contains("matched")) {
+			game.openCards[i].classList.add("card-close");
+			game.openCards[i].classList.remove("card-open", "card-show", "unmatched", "disabled");
 		}
 	}
 }
 
 // Matched
 function matched() {
-	openCards[0].classList.remove("card-open");
-	openCards[0].classList.add("matched", "correct");
-	openCards[1].classList.remove("card-open");
-	openCards[1].classList.add("matched", "correct");
+	game.openCards[0].classList.remove("card-open");
+	game.openCards[0].classList.add("matched", "correct");
+	game.openCards[1].classList.remove("card-open");
+	game.openCards[1].classList.add("matched", "correct");
 }
 
 // Unmatched
 function unmatched() {
-	openCards[0].classList.remove("card-open");
-	openCards[0].classList.add("unmatched");
-	openCards[1].classList.remove("card-open");
-	openCards[1].classList.add("unmatched");
+	game.openCards[0].classList.remove("card-open");
+	game.openCards[0].classList.add("unmatched");
+	game.openCards[1].classList.remove("card-open");
+	game.openCards[1].classList.add("unmatched");
 }
 
 // Moves counter
 function movesCounter() {
-	moves++;
-	document.querySelector(".moves").innerHTML = moves;
-	if (moves === 1) {
+	game.moves++;
+	document.querySelector(".moves").innerHTML = game.moves;
+	if (game.moves === 1) {
 		gameTimer();
 	}
 	// Star rating
-	else if (moves > 10 && moves < 12) {
-		stars.innerHTML = "<i class='fas fa-star'></i><i class='fas fa-star'></i>";
-	} else if (moves > 12) {
-		stars.innerHTML = "<i class='fas fa-star'></i>";
+	else if (game.moves > 10 && game.moves < 12) {
+		game.ui.stars.innerHTML = "<i class='fas fa-star'></i><i class='fas fa-star'></i>";
+	} else if (game.moves > 12) {
+		game.ui.stars.innerHTML = "<i class='fas fa-star'></i>";
 	}
 }
 
 //  Timer
 function gameTimer() {
 	interval = setInterval(function() {
-		timer.innerHTML = `${min} min ${sec} sec`;
-		sec++;
-		if (sec === 60) {
-			min++;
-			sec = 0;
+		game.ui.timer.innerHTML = `${game.min} min ${game.sec} sec`;
+		game.sec++;
+		if (game.sec === 60) {
+			game.min++;
+			game.sec = 0;
 		}
 	}, 1000);
 }
@@ -125,40 +131,40 @@ function gameTimer() {
 function restartGame() {
 	newDeck();
 	// Remove all classes
-	for (const card of cards) {
+	for (const card of game.cards) {
 		card.classList.remove("matched", "disabled", "correct", "card-show", "card-close");
 	}
 	// Reset moves
-	moves = 0;
-	document.querySelector(".moves").innerHTML = moves;
+	game.moves = 0;
+	document.querySelector(".moves").innerHTML = game.moves;
 	// Reset timer
-	min = 0;
-	sec = 0;
-	timer.innerHTML = `${min} min ${sec} sec`;
+	game.min = 0;
+	game.sec = 0;
+	game.ui.timer.innerHTML = `${game.min} min ${game.sec} sec`;
 	clearInterval(interval);
 	// Reset stars
-	stars.innerHTML = "<i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>";
+	game.ui.stars.innerHTML = "<i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>";
 }
 
-restart.addEventListener("click", restartGame);
+game.ui.restart.addEventListener("click", restartGame);
 
 // Congratulations modal
 function showModal() {
-	modal.classList.add("show-modal");
+	game.ui.modal.classList.add("show-modal");
 	// Get final time
 	clearInterval(interval);
-	const finalTime = timer.innerHTML;
+	const finalTime = game.ui.timer.innerHTML;
 	// Get final moves
 	const finalMoves = document.querySelector(".moves").innerHTML;
 	// Get final stars
-	const finalStars = stars.childElementCount;
+	const finalStars = game.ui.stars.childElementCount;
 
 	const gameInfo = document.querySelector(".game-info");
-	gameInfo.innerHTML = `You finished the game in ${finalTime} with ${finalMoves} moves and got ${finalStars} stars`;
+	gameInfo.innerHTML = `You finished the game in ${finalTime} with ${finalMoves} moves and got ${finalStars} stars!`;
 }
 // Close modal
-modalBtn.addEventListener("click", function() {
-	modal.classList.remove("show-modal");
+game.ui.modalBtn.addEventListener("click", function() {
+	game.ui.modal.classList.remove("show-modal");
 	restartGame();
 });
 
