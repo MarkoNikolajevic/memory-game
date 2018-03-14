@@ -41,7 +41,7 @@ function newDeck() {
 function showCards() {
 	for (const card of cards) {
 		card.addEventListener("click", function() {
-			card.classList.add("card-open", "card-show");
+			card.classList.add("card-open", "card-show", "disabled");
 			openCards.push(card);
 			if (openCards.length === 2 && openCards[0].firstElementChild.getAttribute("data-icon") === openCards[1].firstElementChild.getAttribute("data-icon")) {
 				matched();
@@ -73,7 +73,7 @@ function closeCards() {
 	for (let i = 0; i < openCards.length; i++) {
 		if (!openCards[i].classList.contains("matched")) {
 			openCards[i].classList.add("card-close");
-			openCards[i].classList.remove("card-open", "card-show", "unmatched");
+			openCards[i].classList.remove("card-open", "card-show", "unmatched", "disabled");
 		}
 	}
 }
@@ -81,9 +81,9 @@ function closeCards() {
 // Matched
 function matched() {
 	openCards[0].classList.remove("card-open");
-	openCards[0].classList.add("matched", "disabled", "correct");
+	openCards[0].classList.add("matched", "correct");
 	openCards[1].classList.remove("card-open");
-	openCards[1].classList.add("matched", "disabled", "correct");
+	openCards[1].classList.add("matched", "correct");
 }
 
 // Unmatched
