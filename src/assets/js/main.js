@@ -2,6 +2,7 @@
 let cards = document.querySelectorAll(".card");
 cards = Array.from(cards);
 let openCards = [];
+let moves = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -35,6 +36,7 @@ function showCards() {
 			openCards.push(card);
 			if (openCards.length === 2 && openCards[0].firstElementChild.getAttribute("data-icon") === openCards[1].firstElementChild.getAttribute("data-icon")) {
 				matched();
+				movesCounter();
 				openCards = [];
 			} else if (openCards.length === 2 && openCards[0].firstElementChild.getAttribute("data-icon") !== openCards[1].firstElementChild.getAttribute("data-icon")) {
 				unmatched();
@@ -42,6 +44,7 @@ function showCards() {
 					closeCards();
 					openCards = [];
 				}, 500);
+				movesCounter();
 			}
 		});
 	}
@@ -71,6 +74,12 @@ function unmatched() {
 	openCards[0].classList.add("unmatched");
 	openCards[1].classList.remove("card-open");
 	openCards[1].classList.add("unmatched");
+}
+
+// Moves counter
+function movesCounter() {
+	moves++;
+	document.querySelector(".moves").innerHTML = moves;
 }
 
 
