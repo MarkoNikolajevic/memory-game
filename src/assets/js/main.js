@@ -3,6 +3,8 @@ let cards = document.querySelectorAll(".card");
 cards = Array.from(cards);
 let openCards = [];
 let moves = 0;
+let sec = 0;
+let min = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -80,6 +82,23 @@ function unmatched() {
 function movesCounter() {
 	moves++;
 	document.querySelector(".moves").innerHTML = moves;
+	if (moves === 1) {
+		gameTimer();
+	}
+}
+
+//  Timer
+const timer = document.querySelector(".timer");
+
+function gameTimer() {
+	setInterval(function() {
+		timer.innerHTML = `${min} min ${sec} sec`;
+		sec++;
+		if (sec === 60) {
+			min++;
+			sec = 0;
+		}
+	}, 1000);
 }
 
 
