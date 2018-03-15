@@ -22,6 +22,7 @@ You can check and download it [here](https://github.com/MarkoNikolajevic/webkit-
 
 The main tools I used are [Gulp](https://gulpjs.com/) as a task runner to automate building process, and [Sass](http://sass-lang.com/) as a styling preprocessor.
 
+I use [Hey Meta](http://www.heymeta.com/) to create meta tags for the project.
 
 ### Play the game
 Go [here](http://markonikolajevic.com/memory-game/) to play the game.
