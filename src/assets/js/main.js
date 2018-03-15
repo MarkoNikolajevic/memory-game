@@ -130,10 +130,13 @@ function gameTimer() {
 
 // Restart the game
 function restartGame() {
+	// Clear arrays
+	game.openCards = [];
+	game.matchedCards = [];
 	newDeck();
 	// Remove all classes
 	for (const card of game.cards) {
-		card.classList.remove("matched", "disabled", "correct", "card-show", "card-close");
+		card.classList.remove("matched", "disabled", "correct", "card-show", "card-open", "card-close");
 	}
 	// Reset moves
 	game.moves = 0;
