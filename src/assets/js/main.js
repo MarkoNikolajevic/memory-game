@@ -13,7 +13,7 @@ const game = {
 		timer: document.querySelector(".timer"),
 		restart: document.querySelector(".restart"),
 		modal: document.querySelector(".modal-container"),
-		modalBtn: document.querySelector(".play-again-btn")
+		modalBtn: document.querySelector(".play-again-btn"),
 	},
 };
 game.cards = Array.from(game.cards);
@@ -161,28 +161,12 @@ function showModal() {
 	const finalStars = game.ui.stars.childElementCount;
 
 	game.info.innerHTML = `You finished the game in ${finalTime} with ${finalMoves} moves and got ${finalStars} stars!`;
-
-	const finalScore = `${finalStars} in ${finalTime} with ${finalMoves} moves`;
 }
 // Close modal
 game.ui.modalBtn.addEventListener("click", function() {
 	game.ui.modal.classList.remove("show-modal");
 	restartGame();
 });
-
-// Local storage
-function storeScore(score) {
-	let scores;
-	if(localStorage.getItem("scores") === null){
-    scores = [];
-  } else {
-    scores = JSON.parse(localStorage.getItem("scores"));
-  }
-
-  scores.push(score);
-
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}
 
 document.addEventListener("DOMContentLoaded", function() {
 	newDeck();

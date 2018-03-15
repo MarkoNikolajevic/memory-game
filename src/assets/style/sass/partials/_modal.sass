@@ -9,7 +9,6 @@
   overflow: hidden
   background: #000
   background: rgba(0, 0, 0, 0.7)
-  opacity: 0
 
 .modal
   background: $modalBg
@@ -54,7 +53,21 @@
 
 .show-modal
   display: flex
-  opacity: 1
+  animation: slideDown 1s ease-in-out
+
+@keyframes slideDown
+  0%
+    transform: translateY(-100%)
+    opacity: 0
+  30%
+    transform: none
+  60%
+    transform: translateY(-20%)
+  80%
+    transform: translateY(-10%)
+  100%
+    transform: none
+    opacity: 1
 
 @media screen and (min-width: 40em)
   .modal
