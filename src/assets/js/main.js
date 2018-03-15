@@ -7,6 +7,7 @@ const game = {
 	min: 0,
 	openCards: [],
 	matchedCards: [],
+	info: document.querySelector(".game-info"),
 	ui: {
 		stars: document.querySelector(".stars"),
 		timer: document.querySelector(".timer"),
@@ -159,14 +160,29 @@ function showModal() {
 	// Get final stars
 	const finalStars = game.ui.stars.childElementCount;
 
-	const gameInfo = document.querySelector(".game-info");
-	gameInfo.innerHTML = `You finished the game in ${finalTime} with ${finalMoves} moves and got ${finalStars} stars!`;
+	game.info.innerHTML = `You finished the game in ${finalTime} with ${finalMoves} moves and got ${finalStars} stars!`;
+
+	const finalScore = `${finalStars} in ${finalTime} with ${finalMoves} moves`;
 }
 // Close modal
 game.ui.modalBtn.addEventListener("click", function() {
 	game.ui.modal.classList.remove("show-modal");
 	restartGame();
 });
+
+// Local storage
+function storeScore(score) {
+	let scores;
+	if(localStorage.getItem("scores") === null){
+    scores = [];
+  } else {
+    scores = JSON.parse(localStorage.getItem("scores"));
+  }
+
+  scores.push(score);
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
 document.addEventListener("DOMContentLoaded", function() {
 	newDeck();
