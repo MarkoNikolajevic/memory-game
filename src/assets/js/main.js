@@ -164,6 +164,8 @@ function showModal() {
 	const finalStars = game.ui.stars.childElementCount;
 
 	game.info.innerHTML = `You finished the game in ${finalTime} with ${finalMoves} moves and got ${finalStars} stars!`;
+	// Add focus to modal button
+	game.ui.modalBtn.focus();
 }
 // Close modal
 game.ui.modalBtn.addEventListener("click", function() {
